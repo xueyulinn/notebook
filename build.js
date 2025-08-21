@@ -16,7 +16,7 @@ function renderMarkdown(filePath) {
       <title>${path.basename(filePath, ".md")}</title>
     </head>
     <body>
-      <a href="">⬅ Back to Index</a>
+      <a href="../index.html">⬅ Back to Index</a>
       <hr/>
       ${md.render(content)}
     </body>
