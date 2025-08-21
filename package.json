@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^11.3.1",
+    "markdown-it": "^14.1.0",
+    "path": "^0.12.7"
+  }
 }
