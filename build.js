@@ -5,7 +5,7 @@ const md = require("markdown-it")();
 const inputDir = __dirname;
 const outputDir = path.join(__dirname, "dist");
 
-let pages = []; // 保存所有笔记的信息 { title, url, month }
+let pages = []; // store note {title, url, month}
 
 function renderMarkdown(filePath) {
   const content = fs.readFileSync(filePath, "utf-8");
@@ -16,7 +16,7 @@ function renderMarkdown(filePath) {
       <title>${path.basename(filePath, ".md")}</title>
     </head>
     <body>
-      <a href="/index.html">⬅ Back to Index</a>
+      <a href="">⬅ Back to Index</a>
       <hr/>
       ${md.render(content)}
     </body>
@@ -25,16 +25,22 @@ function renderMarkdown(filePath) {
 
 function walkDir(dir) {
   fs.readdirSync(dir).forEach((file) => {
-    // 忽略某些目录
+    // ignore speicifed dirs/files
     if (["node_modules", ".git", "dist", ".github"].includes(file)) {
       return;
     }
 
     const fullPath = path.join(dir, file);
+
+    // recursively get files
     if (fs.statSync(fullPath).isDirectory()) {
       walkDir(fullPath);
     } else if (file.endsWith(".md")) {
+      // inputDir: notebook\ fullPath: notebook\2025.08\test_note.md
+      // relPath: 2025.08\test_note.md
       const relPath = path.relative(inputDir, fullPath);
+
+      // 2025.08\test_note.html
       const url = relPath.replace(/\.md$/, ".html");
       const html = renderMarkdown(fullPath);
       const outPath = path.join(outputDir, url);
@@ -52,7 +58,7 @@ function walkDir(dir) {
 }
 
 function buildIndex() {
-  // 按月份分组
+  // group by year.month
   const grouped = {};
   pages.forEach((p) => {
     if (!grouped[p.month]) grouped[p.month] = [];
@@ -89,5 +95,3 @@ function buildIndex() {
 fs.emptyDirSync(outputDir);
 walkDir(inputDir);
 buildIndex();
-
-console.log("✅ Markdown 转 HTML & Index 页面生成完成");
