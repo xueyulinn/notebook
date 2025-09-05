@@ -9,6 +9,36 @@
       <hr/>
       <h1>EC2</h1>
 <h2>Elastic IP</h2>
+<p>When an EC2 instance stops and restarts its public IP can change. We can create an elastic IP which is a public IP and attch it to the instance, it will not change.</p>
+<h2>Placement Groups</h2>
+<h3>Cluster</h3>
+<ul>
+<li>Place all instances on the same AZ.</li>
+<li>Lowest latency.</li>
+</ul>
+<h3>Spread</h3>
+<ul>
+<li>Each instance is placed on a unique rack.</li>
+<li>High Availability.</li>
+</ul>
+<h3>Partition</h3>
+<ul>
+<li>Each partition corresponds to a physical.</li>
+<li>Place all instances on multiple partitions.</li>
+<li>Can cross AZs.</li>
+<li>Anti-correlation.</li>
+</ul>
+<h2>ENI</h2>
+<ul>
+<li>Virtual internet card.</li>
+<li>Bound to an AZ.</li>
+</ul>
+<h2>EC2 Hibernate</h2>
+<ul>
+<li>Just like the hibernate of PC.</li>
+<li>When EC2 stops the RAM is dumped to EBS instead of lost.</li>
+<li>Then restarts it loads.</li>
+</ul>
 
     </body>
   </html>
